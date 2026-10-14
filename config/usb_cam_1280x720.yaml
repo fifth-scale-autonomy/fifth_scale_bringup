@@ -1,0 +1,17 @@
+# usb_cam: Logitech BRIO 1280x720 (MJPEG 수신 -> RGB)
+# 해상도를 바꾸면 내부 캘리브레이션을 다시 해야 한다.
+/**:
+  ros__parameters:
+    video_device: "/dev/brio"
+    pixel_format: "mjpeg2rgb"
+    image_width: 1280
+    image_height: 720
+    framerate: 10.0       # 라이다(10 Hz)에 맞춤. 검출은 그보다 느리고, 정합 시각 차는 스캔 주기가 결정한다
+    io_method: "mmap"
+    frame_id: "camera_optical_frame"
+    camera_name: "brio_1280x720"
+    camera_info_url: "package://fifth_scale_bringup/config/camera_info/brio_1280x720.yaml"
+    # 초점/노출은 usb_cam 이 BRIO 제어 이름을 몰라서 brio_controls.yaml 로 따로 건다
+    autofocus: false
+    autoexposure: true
+    auto_white_balance: true

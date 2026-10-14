@@ -1,0 +1,107 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid 1m
+      Enabled: true
+      Cell Size: 1
+      Plane Cell Count: 12
+      Color: 160; 160; 164
+      Alpha: 0.6
+      Reference Frame: base_link
+      Value: true
+    - Class: rviz_default_plugins/Grid
+      Name: Grid 0.1m
+      Enabled: true
+      Cell Size: 0.1
+      Plane Cell Count: 60
+      Color: 90; 90; 94
+      Alpha: 0.3
+      Reference Frame: base_link
+      Value: true
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Show Names: true
+      Show Axes: true
+      Show Arrows: false
+      Marker Scale: 0.5
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: scan (raw)
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 255; 120; 0
+      Style: Points
+      Size (Pixels): 2
+      Alpha: 0.5
+      Topic:
+        Value: /scan
+        Reliability Policy: Best Effort
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+      Value: true
+    - Class: rviz_default_plugins/LaserScan
+      Name: scan_filtered
+      Enabled: true
+      Color Transformer: FlatColor
+      Color: 0; 255; 0
+      Style: Points
+      Size (Pixels): 4
+      Alpha: 1
+      Topic:
+        Value: /scan_filtered
+        Reliability Policy: Best Effort
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Name: scan_probe
+      Enabled: true
+      Namespaces: {}
+      Topic:
+        Value: /scan_probe/markers
+        Depth: 5
+        Durability Policy: Transient Local
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 48; 48; 48
+    Fixed Frame: base_link
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/PublishPoint
+      Single click: true
+      Topic:
+        Value: /clicked_point
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/TopDownOrtho
+      Name: Current View
+      Scale: 110
+      X: 2.5
+      Y: 0
+      Angle: -1.5708
+      Target Frame: <Fixed Frame>
+      Value: TopDownOrtho (rviz_default_plugins)
+    Saved: ~
+Window Geometry:
+  Height: 900
+  Width: 1400

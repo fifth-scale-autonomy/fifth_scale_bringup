@@ -1,0 +1,19 @@
+# v4l2_camera: Logitech BRIO 1920x1080, YUYV(무압축), 10 fps
+# 프레임레이트는 이 버전(0.7.3)에 파라미터가 없어 camera.launch.py 가 시작 전에 v4l2-ctl 로 건다.
+# 해상도나 초점이 바뀌면 내부 캘리브레이션을 다시 해야 한다.
+/**:
+  ros__parameters:
+    video_device: "/dev/brio"
+    pixel_format: "YUYV"
+    # 드라이버의 YUYV->RGB 변환이 느려 YUYV 그대로 낸다 (1280x720 1.8 MB). 받는 쪽 cv_bridge 가 1~2 ms 에 변환
+    output_encoding: "yuv422_yuy2"
+    image_size: [1920, 1080]
+    camera_frame_id: "camera_optical_frame"
+    camera_info_url: "package://fifth_scale_bringup/config/camera_info/brio_1920x1080.yaml"
+    # BRIO 제어값 (v4l2_camera 가 장치 제어를 파라미터로 노출한다)
+    focus_automatic_continuous: false   # 자동 초점 끔
+    focus_absolute: 0                   # 0 = 가장 먼 초점 (2단계에서 1~10 m 선명도 확인)
+    exposure_dynamic_framerate: false   # 어두워도 FPS를 낮추지 않음
+    power_line_frequency: 2             # 60 Hz
+    auto_exposure: 3                    # 카메라 기본 자동 노출로 시작 (exposure_control 이 수동으로 바꿈)
+    backlight_compensation: 1           # 카메라 기본값

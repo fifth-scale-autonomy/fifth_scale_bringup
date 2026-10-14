@@ -1,0 +1,17 @@
+# /scan -> /scan_filtered
+# 차체에 가려 항상 가까운 값이 찍히는 각도 범위를 NaN 으로 바꾼다.
+# 각도는 laser 프레임 기준(rad). laser +x 는 라이다 로고 반대쪽(차량 후방)이다.
+#
+# 측정(2026-10-07, 100 스캔): laser 각도 -29.6 ~ +36.4 deg 에서 0.15~0.44 m 값이 고정적으로 찍힘
+#   (그 양 끝은 반사가 불안정해 무효 값이 섞임). 앞뒤로 약 1.5 deg 여유를 두었다.
+# 라이다를 다시 장착하면 `ros2 run lavacone_fusion scan_probe --mode occlusion` 으로 다시 잰다.
+scan_filter:
+  ros__parameters:
+    filter1:
+      name: body_occlusion
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        lower_angle: -0.5498   # -31.5 deg
+        upper_angle: 0.6632    # +38.0 deg
+        replace_with_nan: true
+        wrap_angle: true

@@ -1,0 +1,8 @@
+# driver:=usb_cam 일 때 camera.launch.py 가 카메라 시작 후 v4l2-ctl 로 적용한다 (v4l2-ctl -d /dev/brio -L 로 목록 확인)
+# 초점이나 해상도가 바뀌면 내부 캘리브레이션이 무효가 된다.
+focus_automatic_continuous: 0   # 자동 초점 끔
+focus_absolute: 0               # 0 = 가장 먼 초점 (2단계에서 1~10 m 선명도 확인)
+exposure_dynamic_framerate: 0   # 어두워도 FPS를 낮추지 않음
+power_line_frequency: 2         # 60 Hz (국내 조명 깜빡임 억제)
+auto_exposure: 3                # 카메라 기본 자동 노출로 시작 (exposure_control 이 수동으로 바꿈)
+backlight_compensation: 1       # 카메라 기본값

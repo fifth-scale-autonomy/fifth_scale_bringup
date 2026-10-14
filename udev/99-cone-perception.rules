@@ -1,0 +1,20 @@
+# fifth_scale_bringup 센서 고정 이름 (파일 이름은 이미 설치된 규칙과 같게 둠)
+# 설치: sudo cp 99-cone-perception.rules /etc/udev/rules.d/ && sudo udevadm control --reload-rules && sudo udevadm trigger
+#
+# <..._SERIAL> 은 각자 장치의 일련번호로 바꾼다. 장치를 꽂고 다음으로 찾는다 (첫 번째 {serial} 값):
+#   라이다:  udevadm info -a -n /dev/ttyUSB0 | grep '{serial}' | head -1
+#   카메라:  udevadm info -a -n /dev/video0  | grep '{serial}' | head -1
+#   차량 제어기 (FTDI): udevadm info -a -n /dev/ttyUSB1 | grep '{serial}' | head -1
+#   (ttyUSB 번호는 꽂은 순서에 따라 다르다. ls -l /dev/serial/by-id/ 로 어느 장치인지 확인)
+#
+# 링크는 /dev 바로 아래에 만든다. usb_cam은 링크 대상을 "/dev/" + readlink 로 해석하므로
+# /dev/v4l/by-id/... 처럼 하위 폴더의 상대 링크는 열지 못한다.
+
+# RPLIDAR S2 (Slamtec 어댑터, CP2102N)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", ATTRS{serial}=="<LIDAR_SERIAL>", SYMLINK+="rplidar", GROUP="dialout", MODE="0660"
+
+# Logitech BRIO 컬러 영상 노드 (index 0; index 2는 적외선)
+SUBSYSTEM=="video4linux", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="085e", ATTRS{serial}=="<BRIO_SERIAL>", ATTR{index}=="0", SYMLINK+="brio"
+
+# 1/5 차량 제어기 (FTDI FT232R, scale_vehicle_node 가 /dev/car 를 연다)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", ATTRS{serial}=="<CAR_SERIAL>", SYMLINK+="car", GROUP="dialout", MODE="0660"
